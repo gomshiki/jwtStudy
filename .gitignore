@@ -38,3 +38,6 @@ out/
 
 ### resource 제외 ###
 resources/
+
+### Mac OS ###
+.DS_Store
