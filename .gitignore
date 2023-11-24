@@ -41,3 +41,7 @@ resources/
 
 ### Mac OS ###
 .DS_Store
+
+
+## 추가
+.gradlew.bat
