@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### resource 제외 ###
+resources/
