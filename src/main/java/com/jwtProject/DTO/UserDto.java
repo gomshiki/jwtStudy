@@ -2,9 +2,10 @@ package com.jwtProject.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@NoArgsConstructor
 @Getter
 @ToString
 public class UserDto {
@@ -13,4 +14,8 @@ public class UserDto {
 
     private String password;
 
+    public UserDto(String userId, String password) {
+        this.userId = userId;
+        this.password = password;
+    }
 }
