@@ -1,4 +1,4 @@
-package com.jwtProject.Controller;
+package com.jwtProject.controller;
 
 
 import org.springframework.stereotype.Controller;

@@ -1,9 +1,8 @@
-package com.jwtProject.Controller;
+package com.jwtProject.controller;
 
-import com.jwtProject.DTO.UserDto;
+import com.jwtProject.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
