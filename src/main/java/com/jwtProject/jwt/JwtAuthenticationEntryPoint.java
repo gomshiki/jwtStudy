@@ -7,10 +7,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
 /**
  * 유효한 자격증명을 제공하지 않고, 접근하려 할때 401 Unauthorized 에러를 리턴하도록 하는 클래스
  */
+@Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override

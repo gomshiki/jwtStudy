@@ -1,11 +1,6 @@
 package com.jwtProject.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
@@ -75,9 +70,8 @@ public class TokenProvider implements InitializingBean {
 
         // Jwt 토큰을 생성 후 리턴
         return Jwts.builder()
-                .subject(authentication.getName())
+                .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
-                .signWith()
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
@@ -95,7 +89,7 @@ public class TokenProvider implements InitializingBean {
 
         // 파라미터로 받아온 token을 이용해서 Claim 생성
         Claims claims = Jwts
-                .parser()
+                .parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
@@ -122,7 +116,7 @@ public class TokenProvider implements InitializingBean {
      */
     public boolean validateToken(String token){
         try {
-            Jwts.parser().setSigningKey(key).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             logger.info("잘못된 JWT 서명입니다.");
