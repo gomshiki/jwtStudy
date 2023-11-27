@@ -70,7 +70,7 @@ public class SecurityConfig {
                         registry.requestMatchers(
 
                                 new AntPathRequestMatcher("/api/hello"),
-                                new AntPathRequestMatcher("/api/authentication"),
+                                new AntPathRequestMatcher("/api/authenticate"),
                                 new AntPathRequestMatcher("/api/signup")
                                         )
                                 .permitAll()
