@@ -46,7 +46,7 @@ public class HelloController {
 
 
 ### 3) Postman 으로 테스트
-![[Pasted image 20231129205716.png]]
+![img_1.png](img_1.png)
 
 
 
@@ -210,7 +210,7 @@ public class User {
 #### - 테이블 관계도
 * User <-> Authority :  N : N 으로 다대다 관계입니다. 이를 중간에 user_authority(조인테이블)을 이용해 (1:N - N:1) 관계로 정리
 
-![[Pasted image 20231129213154.png]]
+![img_2.png](img_2.png)
 
 
 
