@@ -19,9 +19,10 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
     @Override
     public void configure(HttpSecurity http) {
 
+        // JwtFilter를 이용해 작성한 tokenProvider를 customFilter 인스턴스를 만들고
         JwtFilter customFilter = new JwtFilter(tokenProvider);
 
-        // JwtFilter를 이용해 Spring Security 필터에 등록
+        // HttpSecurity addFilterBefore 메서드를 이용해 이용해 Spring Security 필터에 customFilter 를 등록합니다.
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
