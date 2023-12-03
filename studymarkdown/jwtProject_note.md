@@ -39,10 +39,7 @@ public class HelloController {
 
 
 ### 3) Postman 으로 테스트
-![Pasted image 20231129205716.png](Pasted image 20231129205716.png)
-
-
-
+![](images/Pasted image 20231129205716.png)
 
 
 # 2. Security 과 Data 설정
@@ -182,7 +179,7 @@ public class User {
 #### - 테이블 관계도
 * User <-> Authority :  N : N 으로 다대다 관계입니다. 이를 중간에 user_authority(조인테이블)을 이용해 (1:N - N:1) 관계로 정리
 
-![Pasted image 20231129213154.png](Pasted image 20231129213154.png)
+![](images/Pasted image 20231129213154.png)
 
 
 ```java
@@ -231,10 +228,10 @@ jwt:
   token-validity-in-seconds: 86400  
   
 ```
-![Pasted image 20231130125421.png](Pasted image 20231130125421.png)
+![](images/Pasted image 20231130125421.png)
 - #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 합니다.
     - Secret 값은 터미널에서 특정 문자열을 Base64로 인코딩한 값 입니다.
-![Pasted image 20231130125836.png](Pasted image 20231130125836.png)
+![](images/Pasted image 20231130125836.png)
 - #token-validity-in-seconds 은 86400초로 설정합니다.
 
 
@@ -855,11 +852,11 @@ public class AuthController {
 ## 1. authenticate  POST 요청
 
 - admin 계정정보는 처음 data.sql 의 insert 문이 서버가 시작될 때 자동 실행되어 DB에 저장된 상태입니다.
-![Pasted image 20231202141719.png](Pasted image 20231202141719.png)
+![](images/Pasted image 20231202141719.png)
 
 
 - ##### Postman 기능을 이용해 Response 데이터 전역변수에 저장해서 다른 Requests에서 사용할 수 있습니다.
-![Pasted image 20231202142016.png](Pasted image 20231202142016.png)
+![](images/Pasted image 20231202142016.png)
 
 
 
@@ -1055,14 +1052,14 @@ public class UserController {
 
 
 #### - POSTMAN Request - Response 결과
-![Pasted image 20231203135657.png](Pasted image 20231203135657.png)
+![](images/Pasted image 20231203135657.png)
 
 #### - 권한 정보 및 유저정보 DB 저장 확인
-![Pasted image 20231203142445.png](Pasted image 20231203142445.png)
+![](images/Pasted image 20231203142445.png)
 
 
 ### (2) 계정 권한에 따른 두 개의 API 검증
 
 - authenticate Request 시 tests 탭에서 response 파싱을 통해 토큰 정보를 담아놓았떤 **jwt_tutorial_token** 변수를 Authorization - Bearer Token에 정의 [[#1. authenticate POST 요청]]
 - 먼저 authenticate request 으로 받아온 토큰을 이용해 jskim 계정으로 새롭게 request 시 정상적으로 값을 반환 하는 것을 확인할 수 있습니다.
-![Pasted image 20231203143756.png](Pasted image 20231203143756.png)
+![](images/Pasted image 20231203143756.png)
