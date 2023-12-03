@@ -1,9 +1,7 @@
 package com.jwtProject.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
-import com.jwtProject.jwt.JwtAccessDeniedHandler;
-import com.jwtProject.jwt.JwtAuthenticationEntryPoint;
+import com.jwtProject.jwt.errors.JwtAccessDeniedHandler;
+import com.jwtProject.jwt.errors.JwtAuthenticationEntryPoint;
 import com.jwtProject.jwt.JwtSecurityConfig;
 import com.jwtProject.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;

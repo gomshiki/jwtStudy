@@ -1,4 +1,4 @@
-package com.jwtProject.jwt;
+package com.jwtProject.jwt.errors;
 
 
 import jakarta.servlet.ServletException;
