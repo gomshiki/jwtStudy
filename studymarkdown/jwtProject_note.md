@@ -851,11 +851,11 @@ public class AuthController {
 ## 1. authenticate  POST 요청
 
 - admin 계정정보는 처음 data.sql 의 insert 문이 서버가 시작될 때 자동 실행되어 DB에 저장된 상태입니다.
-- <img src="./images/Pasted image 20231202141719.png">
+<img src="./images/Pasted image 20231202141719.png">
 
 
 - ##### Postman 기능을 이용해 Response 데이터 전역변수에 저장해서 다른 Requests에서 사용할 수 있습니다.
-- <img src="./images/Pasted image 20231202142016.png">
+<img src="./images/Pasted image 20231202142016.png">
 
 
 
@@ -867,7 +867,7 @@ public class AuthController {
 
 ### (1) SecurityUtil 클래스 생성 : 간단한 유틸리티 메서드 구현 클래스
 
-- **getCurrentUsername()** : SecurityContext의 Authentication 객체를 이용해 username을 반환하는 유틸성 메서드
+**getCurrentUsername()** : SecurityContext의 Authentication 객체를 이용해 username을 반환하는 유틸성 메서드
     - SecurityContextHolder 에서 Authentication 객체를 꺼냄
     - authentication - getPrincipal() - getUsername() 순서대로 유저명을 꺼내 반환
 
@@ -1050,13 +1050,13 @@ public class UserController {
 
 
 #### - POSTMAN Request - Response 결과
-<img src="./images/Pasted image 20231203135657.png)">
+<img src="./images/Pasted image 20231203135657.png">
 
 #### - 권한 정보 및 유저정보 DB 저장 확인
 <img src="./images/Pasted image 20231203142445.png">
 
 
-### (2) 계정 권한에 따른 두 개의 API 검증
+### (2) 계정 권한에 따른 두 개의 API 검증
 
 - authenticate Request 시 tests 탭에서 response 파싱을 통해 토큰 정보를 담아놓았떤 **jwt_tutorial_token** 변수를 Authorization - Bearer Token에 정의 [[#1. authenticate POST 요청]]
 - 먼저 authenticate request 으로 받아온 토큰을 이용해 jskim 계정으로 새롭게 request 시 정상적으로 값을 반환 하는 것을 확인할 수 있습니다.
