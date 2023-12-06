@@ -19,7 +19,7 @@ dependencies {
   
 
 ```
-
+<br>
 
 ### 2) 테스트용 controller 생성
 ```java
@@ -36,12 +36,16 @@ public class HelloController {
 }
 ```
 
-
+<br>
 
 ### 3) Postman 으로 테스트
 <img src="./images/Pasted image 20231129205716.png">
 
+<br><br>
 # 2. Security 과 Data 설정
+
+<br>
+
 ### 1) 401 unauthorized 해결을 위한 Security 설정
 #### - SecurityConfig.class 생성
 ```java
@@ -76,6 +80,8 @@ public class SecurityConfig {
     }  
 }
 ```
+
+<br>
 
 
 
@@ -125,7 +131,7 @@ logging:
 
 ```
 
-
+<br>
 
 
 
@@ -173,7 +179,7 @@ public class User {
 }
 ```
 
-
+<br>
 
 #### - 테이블 관계도
 * User <-> Authority :  N : N 으로 다대다 관계입니다. 이를 중간에 user_authority(조인테이블)을 이용해 (1:N - N:1) 관계로 정리
@@ -196,6 +202,8 @@ public class Authority {
 }
 ```
 
+<br>
+
 
 #### - 쿼리문 작성(data.sql)
 * 아래 쿼리는 스프링 부트 실행할때 마다 실행됩니다.
@@ -211,10 +219,12 @@ insert into user_authority (user_id, authority_name) values (1, 'ROLE_ADMIN');
 insert into user_authority (user_id, authority_name) values (2, 'ROLE_USER');
 ```
 
-
+<br><br>
 
 
 #   3. JWT 코드, Security 설정 추가
+
+<br>
 
 ## 1) JWT 설정 추가
 #### - application.yml에 JWT 설정 추가
@@ -226,14 +236,18 @@ jwt:
   token-validity-in-seconds: 86400  
   
 ```
+<br>
+
 <img src="./images/Pasted image 20231130125421.png">
+
+<br>
 
 - #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 합니다.
     - Secret 값은 터미널에서 특정 문자열을 Base64로 인코딩한 값 입니다.
 - <img src="./images/Pasted image 20231130125836.png">
 - #token-validity-in-seconds 은 86400초로 설정합니다.
 
-
+<br>
 
 #### - build.gradle에 JWT 관련 라이브러리 추가
 
@@ -248,17 +262,21 @@ dependencies {
     }  
 ```
 
-
+<br>
 
 
 ## 2)  JWT 관련 코드 개발
 
+<br>
+
 ### (1) `TokenProvider.class` : 토큰의 생성, 유효성 검증 등을 담당
 
 * InitializingBean 을 상속받아 **afterPropertiesSet** 을 Override한 이유
-    *  1) Bean 이 생성이 되고(Component Scan)
+    * 1) Bean 이 생성이 되고(Component Scan)
     * 2) 의존성 주입(생성자 주입)을 받은 후
     * 3) 주입받은 secret 값을 Base64 Decode해서 key 변수에 할당위함
+
+<br>
 
 ```java
 @Component  
@@ -290,7 +308,7 @@ public class TokenProvider implements InitializingBean {
 }
 ```
 
-
+<br>
 
 #### String creatToken(Authentication) 메서드 생성
 - **Authentication 객체 정보를 받아  토큰을 생성** 하는 createToken 메서드 추가 (Authentication 객체 = Spring Security 에서 제공)
@@ -327,6 +345,7 @@ public class TokenProvider implements InitializingBean {
     }  
 ```
 
+<br>
 
 #### Authentication getAuthentication(String token) 메서드 생성
 
@@ -359,7 +378,7 @@ public Authentication getAuthentication(String token) {
   
 }
 ```
-
+<br>
 
 #### boolean validateToken(String token) 메서드 생성
 
@@ -387,7 +406,7 @@ public boolean validateToken(String token){
 }
 
 ```
-
+<br>
 
 ### (2) JwtFilter.class : customFilter for JWT
 
@@ -420,7 +439,7 @@ public class JwtFilter extends GenericFilterBean {
 
 
 ```
-
+<br>
 
 #### void doFilter(ServletRequest, ServletResponse, FilterChain) 메서드 구현
 
@@ -463,7 +482,7 @@ public class JwtFilter extends GenericFilterBean {
   
     }
 ```
-
+<br>
 
 
 #### String resolveToken(HttpServletRequest request) 메서드 구현
@@ -484,7 +503,7 @@ public class JwtFilter extends GenericFilterBean {
 }
 ```
 
-
+<br>
 
 
 ### (3) JwtSecurityConfig.class : SecurityConfig에 TokenProvider와 JwtFilter를 적용하기위한 클래스입니다.
@@ -515,7 +534,7 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
 }
 ```
 
-
+<br>
 
 ### (4) JwtAuthenticationEntiryPoint.class : 유효한 자격증명을 제공하지 않고, 접근하려할 때 401 Unauthorized 에러를 반환하는 클래스
 
@@ -555,10 +574,12 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 - **AccessDeniedHandler**를 implements 받아 **handle()** 메서드를 @override 합니다.
     - **HttpServletResponse** 인터페이스의 **SC_FORBIDDEN(403)** 에러를 response.sendError()에 담습니다.
 
-
+<br>
 
 
 ## 3) Jwt 관련 생성한 5개의 클래스를 Security Config 에 추가하기
+
+<br>
 
 ### 1) SecurityConfig.class 수정
 
@@ -643,7 +664,7 @@ public class SecurityConfig {
 ```
 
 
-
+<br><br>
 
 
 
@@ -673,6 +694,8 @@ public class LoginDto {
 
 ```
 
+<br>
+
 ### (2) TokenDto.class : Token 정보를 Response 할 때 사용
 
 ```java
@@ -689,6 +712,7 @@ public class TokenDto {
 
 ```
 
+<br>
 
 ### (3) UserDto.class : 회원가입 시 사용
 ```java
@@ -716,7 +740,7 @@ public class UserDto {
 
 ```
 
-
+<br>
 
 ## 2) Repository 구현
 
@@ -738,6 +762,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 }
 ```
 
+<br>
 
 ## 3) Service 구현
 
@@ -786,6 +811,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 }
 
 ```
+
+<br>
+
 
 ## 4) 로그인 API 구현
 
@@ -843,7 +871,7 @@ public class AuthController {
 }
 ```
 
-
+<br>
 
 
 # 4. Postman 으로 테스트
@@ -904,11 +932,11 @@ public class SecurityUtil {
 
 ```
 
-
+<br>
 
 >
 > SecurityContext 에 Authentication 객체가 저장되는 시점은 JwtFilter의 doFilter() 메서드에서 
-> Request가 들어올 때 Authentication 객체를 저장해서 사용합니다.
+> Redquest가 들어올 때 Authentication 객체를 저장해서 사용합니다.
 >
 
 
@@ -919,6 +947,7 @@ public class SecurityUtil {
 	
 ```
 
+<br>
 
 ### (2) UserService 클래스 생성 : 회원가입, 유저정보 조회 등 메서드 구현 클래스
 
@@ -983,7 +1012,7 @@ public class UserService {
     }  
 }
 ```
-
+<br>
 
 
 ### (3) UserController : UserService 메서드를 호출
@@ -1028,12 +1057,12 @@ public class UserController {
 
 
 
-
+<br>
 
 
 ## 2) 검증
 
-### (1) 회원가입 API 검증
+### (1) 회원가입 API 검증
 
 - workflow
     - UserController.class - signup(@Valid @RequestBody UserDto userDto)
@@ -1048,13 +1077,18 @@ public class UserController {
               .activated(true)  
               .build();
 
+<br>
+
 
 #### - POSTMAN Request - Response 결과
 <img src="./images/Pasted image 20231203135657.png">
 
+<br>
+
 #### - 권한 정보 및 유저정보 DB 저장 확인
 <img src="./images/Pasted image 20231203142445.png">
 
+<br>
 
 ### (2) 계정 권한에 따른 두 개의 API 검증
 
